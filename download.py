@@ -8,6 +8,11 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
+SLEEP_TIMER_SEC = 0.1
+
+# seems to be the limit within the API
+MAX_RESULTS = 50
+
 bids_schema = {
     "_id": {"type": "string", "required": True},
     # BIDS identification bits
@@ -297,18 +302,17 @@ def get_iqms(modality: str, page: int = 1, max_results: int = 50) -> pl.DataFram
 
 
 def main(outdir: Path, modality: str, max_pages: int = 50):
-    max_results: int = 50
     ds: list[pl.DataFrame] = []
     page: int = 1
     while page < max_pages:
         print(f"{page=}")
         try:
-            d = get_iqms(modality, page=page, max_results=max_results)
+            d = get_iqms(modality, page=page, max_results=MAX_RESULTS)
             ds.append(d)
         except BaseException as e:
             logging.error(e)
 
-        time.sleep(0.1)
+        time.sleep(SLEEP_TIMER_SEC)
 
         page += 1
 

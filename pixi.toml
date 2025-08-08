@@ -1,0 +1,13 @@
+[workspace]
+authors = ["Patrick Sadil <psadil@gmail.com>"]
+channels = ["conda-forge"]
+name = "mriqcwebapi"
+platforms = ["osx-arm64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+polars = ">=1.31.0,<2"
+requests = ">=2.32.4,<3"
+jupyter = ">=1.1.1,<2"

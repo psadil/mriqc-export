@@ -8,7 +8,7 @@ import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util import Retry
 
-SLEEP_TIMER_SEC = 0.1
+SLEEP_TIMER_SEC = 0.05
 
 # seems to be the limit within the API
 MAX_RESULTS = 50
